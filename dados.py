@@ -28,7 +28,7 @@ projeto = {
     #            embaixo do QR code (para quem não conseguir escanear).
     "qrcode": {
         "arquivo": "qrcode.png",
-        "url": "",
+        "url": "https://gomes333.github.io/projeto-ciartec/",
         "titulo": "Leia em outro dispositivo",
         "texto": "Aponte a câmera do celular ou do tablet para o QR code e abra este jornal na hora.",
     },
