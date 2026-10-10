@@ -44,3 +44,23 @@
 </article>
 {% endif %}
 {% endmacro %}
+
+{# QR code para abrir o site em outro dispositivo. Sem a imagem em imagens/, mostra o espaço reservado. #}
+{% macro qrcode(q, jornal) %}
+{% set real = foto_arquivo(q.arquivo) %}
+<aside class="qr" aria-labelledby="qr-titulo">
+  <div class="qr-quadro{% if not real %} vazio{% endif %}">
+    {% if real %}
+      <img src="imagens/{{ real|urlencode }}" alt="QR code para abrir o {{ jornal }} em outro dispositivo" width="160" height="160" loading="lazy" decoding="async">
+    {% else %}
+      <span>QR code<br><small>imagens/{{ q.arquivo }}</small></span>
+    {% endif %}
+  </div>
+  <div class="qr-texto">
+    <p class="chapeu">Continue no celular</p>
+    <h2 id="qr-titulo">{{ q.titulo }}</h2>
+    <p>{{ q.texto }}</p>
+    {% if q.url %}<p class="qr-url"><a href="{{ q.url }}">{{ q.url|replace("https://", "")|replace("http://", "")|trim("/") }}</a></p>{% endif %}
+  </div>
+</aside>
+{% endmacro %}

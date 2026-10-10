@@ -34,7 +34,7 @@ NOMES_PROPRIOS = [
     "Ásia Central", "Ásia", "Cabul", "ODS", "ONU", "CIARTEC",
 ]
 
-EXTENSOES = {".jpg", ".jpeg", ".png", ".webp"}
+EXTENSOES = {".jpg", ".jpeg", ".png", ".webp", ".svg"}
 LARGURA_MAXIMA = 1600
 
 
@@ -113,7 +113,8 @@ def preparar_imagens(origem: Path, destino: Path):
         encontradas.append(arquivo.name)
         saida = destino / arquivo.name
 
-        if Image is None:
+        # SVG (vetorial) e ausência do Pillow: copia sem mexer
+        if Image is None or arquivo.suffix.lower() == ".svg":
             shutil.copy2(arquivo, saida)
             continue
 

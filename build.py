@@ -131,6 +131,10 @@ def gerar():
         nome for nome in _fotos_usadas() if not c.resolver_imagem(fotos, nome)
     })
     print(f"Site gerado em {SAIDA}  ({len(paginas)} páginas)")
+    qr = projeto.get("qrcode")
+    if qr and not c.resolver_imagem(fotos, qr["arquivo"]):
+        print(f"Aviso: QR code ainda não adicionado — o espaço reservado aparece no site. "
+              f"Coloque o arquivo em imagens/{qr['arquivo']} e gere de novo.")
     if faltando:
         print("Atenção: estas fotos não estão em imagens/ (aparecem como espaço reservado):")
         for nome in faltando:

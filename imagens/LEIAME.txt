@@ -10,3 +10,7 @@ Coloque aqui as fotos do jornal (as mesmas do projeto original), com estes nomes
 Se uma foto não existir, o site mostra um espaço reservado listrado com o nome esperado.
 O build.py avisa no terminal quais fotos estão faltando e reduz fotos maiores que 1600 px.
 Formatos aceitos: .jpg, .jpeg, .png, .webp
+
+QR code (opcional, aparece acima do rodapé em todas as páginas):
+
+  qrcode.png                  QR code que aponta para o site publicado (também aceita .jpg, .webp ou .svg)

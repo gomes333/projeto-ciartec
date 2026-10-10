@@ -1,4 +1,4 @@
-{% from "macros.html" import foto, materia %}
+{% from "macros.html" import foto, materia, qrcode %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -76,6 +76,10 @@
     </nav>
     {% endif %}
   </main>
+
+  {% if projeto.qrcode %}
+  <div class="pagina qr-faixa">{{ qrcode(projeto.qrcode, projeto.jornal) }}</div>
+  {% endif %}
 
   <footer class="pagina rodape">
     <div class="rodape-nome">{{ projeto.jornal }}</div>

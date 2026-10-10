@@ -474,6 +474,48 @@ h1, h2, h3 {
 .rodape-nome { font: 700 1.6rem/1.2 var(--f-nome); color: var(--tinta); margin-bottom: 4px; }
 
 
+/* QR code: abrir o jornal em outro dispositivo (acima do rodapé).
+   O quadro é sempre branco, mesmo no modo noturno: o QR precisa de fundo claro para ser lido. */
+.qr-faixa { margin-top: 40px; }
+.qr {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 32px);
+    max-width: 640px;
+    margin: 0 auto;
+    padding: clamp(18px, 3vw, 26px);
+    border-top: 3px solid var(--tinta);
+    border-bottom: 1px solid var(--fio);
+}
+.qr-quadro {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: clamp(120px, 22vw, 160px);
+    aspect-ratio: 1;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid var(--fio);
+}
+.qr-quadro img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.qr-quadro.vazio {
+    padding: 10px;
+    text-align: center;
+    font: 600 0.85rem/1.5 var(--f-ui);
+    color: #6b6b72;
+    background:
+        repeating-linear-gradient(135deg, transparent 0 9px, #cdcac1 9px 10px),
+        #f4f3ef;
+    border-style: dashed;
+}
+.qr-quadro.vazio small { font-weight: 400; font-size: 0.7rem; word-break: break-all; }
+.qr-texto h2 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 800; }
+.qr-texto p { margin: 8px 0 0; font: 400 0.95rem/1.5 var(--f-ui); color: var(--tinta-2); }
+.qr-texto .chapeu { margin: 0 0 6px; color: var(--acento); }
+.qr-texto .qr-url { font-weight: 600; word-break: break-all; }
+.qr-faixa + .rodape { margin-top: 0; border-top: 0; }
+
+
 /* ---------- 7. Quiz ---------- */
 
 .quiz-pagina { padding: clamp(22px, 4vw, 40px) 0 8px; }
@@ -751,6 +793,8 @@ h1, h2, h3 {
     .par .materia + .materia { border-left: 0; }
     .materia-larga .texto, .faixa .texto { columns: 1; }
 
+    .qr { flex-direction: column; text-align: center; }
+
     .pager { grid-template-columns: minmax(0, 1fr); gap: 0; }
     .pager-proxima, .pager-anterior { grid-column: 1; text-align: left; }
     .pager-proxima { order: -1; }
@@ -764,6 +808,7 @@ h1, h2, h3 {
 
 @media print {
     .utilitaria, .barra, .pager, .rodape, .menu-botao, .tema, .pular { display: none !important; }
+    .qr-faixa { break-inside: avoid; }
     body { background: #fff; color: #000; font-size: 11pt; }
     .pagina { max-width: none; padding: 0; }
     .colunas { grid-template-columns: repeat(var(--n, 3), 1fr); }

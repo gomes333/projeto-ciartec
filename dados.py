@@ -21,6 +21,18 @@ projeto = {
         "Afeganistão, desigualdade social e ODS 10."
     ),
 
+    # QR code para abrir o jornal em outro dispositivo (aparece acima do rodapé).
+    #   arquivo: coloque a imagem em imagens/ (aceita .png, .jpg, .webp e .svg).
+    #            Enquanto ela não existir, o site mostra um espaço reservado.
+    #   url:     endereço do site publicado; se preenchido, aparece escrito
+    #            embaixo do QR code (para quem não conseguir escanear).
+    "qrcode": {
+        "arquivo": "qrcode.png",
+        "url": "",
+        "titulo": "Leia em outro dispositivo",
+        "texto": "Aponte a câmera do celular ou do tablet para o QR code e abra este jornal na hora.",
+    },
+
     "rodape": [
         "Ásia em Transformação",
         "Projeto desenvolvido para a CIARTEC",

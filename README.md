@@ -12,6 +12,7 @@ O projeto apresenta informações em formato de jornal, combinando reportagens, 
 - **Navegação entre páginas:** avanço sequencial, retorno à página anterior e indicadores de progresso.
 - **Design responsivo:** adaptação para computadores e dispositivos móveis.
 - **Modo noturno:** opção de leitura com tema escuro.
+- **QR code:** bloco acima do rodapé, em todas as páginas, para abrir o jornal em outro dispositivo.
 - **Barra de leitura:** indicador visual do progresso na página.
 - **Persistência local:** o melhor resultado do quiz e a preferência de tema podem ser armazenados no navegador.
 
@@ -94,6 +95,10 @@ Edite os conteúdos em `dados.py`. Cada item da lista `jornais` representa uma p
 
 Adicione ou substitua as fotografias na pasta `imagens/`, respeitando os nomes de arquivo utilizados pelos conteúdos. Consulte `imagens/LEIAME.txt` para verificar as imagens esperadas.
 
+### QR code
+
+O bloco do QR code aparece acima do rodapé de todas as páginas. Gere o QR code apontando para o endereço do site publicado, salve a imagem como `imagens/qrcode.png` (também aceita `.jpg`, `.webp` e `.svg`) e execute `python build.py`. Enquanto o arquivo não existir, o site mostra um espaço reservado. Em `dados.py` (`projeto["qrcode"]`) é possível trocar o nome do arquivo, os textos e informar a `url`, que passa a aparecer escrita abaixo do QR code.
+
 ### Quiz
 
 Edite a lista `perguntas` em `quiz.py`. Cada pergunta deve ter alternativas válidas, uma resposta correspondente a uma das opções e, quando aplicável, uma explicação para o feedback após a resposta.
@@ -120,7 +125,11 @@ A configuração de cada plataforma deve apontar para o comando de build e o dir
 
 ## Créditos
 
+<<<<<<< HEAD
 Projeto desenvolvido originalmente por **Isadora Gomes - ([@gomes333](https://github.com/gomes333))** para a CIARTEC, com contribuições posteriores de **Miguel Henrique — ([@GalvaoLabs](https://github.com/GalvaoLabs))** no desenvolvimento e aprimoramento do site.
+=======
+Projeto desenvolvido originalmente por **Isadora Vicente - ([@gomes333](https://github.com/gomes333))** para a CIARTEC, com contribuições posteriores de **Miguel Henrique — ([@GalvaoLabs](https://github.com/GalvaoLabs))** no desenvolvimento e aprimoramento do site.
+>>>>>>> 4f4bfc6 (Adiciona espaço para QR code acima do rodapé)
 
 A autoria das contribuições deve ser reconhecida de acordo com a participação efetiva de cada colaborador.
 
