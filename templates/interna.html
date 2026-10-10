@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block titulo %}{{ pagina.secao }} — {{ projeto.jornal }}{% endblock %}
+
+{% block conteudo %}
+<div class="interna">
+  <h1 class="secao-titulo">{{ pagina.secao }}</h1>
+
+  {# Reportagens "total" ocupam a linha; as demais ficam em pares #}
+  {% set ns = namespace(par=[]) %}
+  {% for m in jornal.materias %}
+    {% if m.largura == 'total' %}
+      {% if ns.par %}<div class="par">{% for x in ns.par %}{{ materia(x) }}{% endfor %}</div>{% set ns.par = [] %}{% endif %}
+      {{ materia(m) }}
+    {% else %}
+      {% set ns.par = ns.par + [m] %}
+      {% if ns.par|length == 2 %}<div class="par">{% for x in ns.par %}{{ materia(x) }}{% endfor %}</div>{% set ns.par = [] %}{% endif %}
+    {% endif %}
+  {% endfor %}
+  {% if ns.par %}<div class="par">{% for x in ns.par %}{{ materia(x) }}{% endfor %}</div>{% endif %}
+
+  {% if jornal.faixa %}
+  <aside class="faixa">
+    <h2>{{ jornal.faixa.titulo|sentenca }}</h2>
+    <div class="texto">{{ jornal.faixa.texto|paragrafos }}</div>
+  </aside>
+  {% endif %}
+
+  {% if jornal.fecho %}
+  <aside class="fecho">
+    <p class="fecho-nome">{{ projeto.jornal }}</p>
+    <blockquote><p>“{{ jornal.fecho.frase|limpar }}”</p></blockquote>
+  </aside>
+  {% endif %}
+</div>
+{% endblock %}

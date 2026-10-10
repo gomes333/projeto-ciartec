@@ -1,0 +1,3 @@
+Jinja2>=3.1
+# Opcional: reduz fotos muito grandes automaticamente (sem ele, elas são só copiadas)
+Pillow>=10

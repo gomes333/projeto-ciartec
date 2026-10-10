@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block titulo %}Quiz — {{ projeto.jornal }}{% endblock %}
+
+{% block conteudo %}
+<div class="quiz-pagina">
+  <div class="quiz-intro">
+    <p class="chapeu">Desafio da edição</p>
+    <h1>Teste seus conhecimentos</h1>
+    <p class="linha-fina">Responda às questões e confira o que você aprendeu nesta edição. A resposta certa aparece logo depois de cada pergunta.</p>
+  </div>
+
+  <section class="desafio" id="quiz" aria-label="Desafio">
+    <noscript><p class="nota">O quiz precisa de JavaScript. Ative-o no navegador e recarregue a página.</p></noscript>
+  </section>
+  <script type="application/json" id="quiz-data">{{ quiz_json|safe }}</script>
+</div>
+{% endblock %}
+
+{% block scripts %}<script src="static/quiz.js" defer></script>{% endblock %}

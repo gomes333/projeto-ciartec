@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block titulo %}{{ jornal.titulo|sentenca }} — {{ projeto.jornal }}{% endblock %}
+
+{% block conteudo %}
+<div class="editorias" aria-label="Editorias">
+  {% for e in jornal.editorias|editorias %}<span>{{ e }}</span>{% endfor %}
+</div>
+
+<div class="capa">
+  <section class="capa-destaque">
+    <p class="chapeu">{{ jornal.titulo|sentenca }}</p>
+    <h1>{{ jornal.chamada|sentenca }} {{ jornal.manchete|lower }}</h1>
+    <p class="linha-fina">{{ jornal.linha_fina|limpar }}</p>
+    <p class="meta">{{ tempo_leitura(jornal) }} min de leitura</p>
+  </section>
+
+  <aside class="capa-rail" aria-labelledby="nesta-edicao">
+    <h2 id="nesta-edicao">Nesta edição</h2>
+    <ul>
+      {% for p in paginas if p.arquivo != pagina.arquivo %}
+      <li>
+        <a href="{{ p.arquivo }}">
+          <span class="chapeu">{{ p.secao }}</span>
+          <strong>{{ p.titulo }}</strong>
+          <span class="resumo">{{ p.resumo }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <div class="capa-hero">
+    {% set principal = jornal.imagem_principal %}
+    {{ foto(principal.arquivo, principal.descricao, "21x9", principal.descricao, alt=False, prioridade=True) }}
+  </div>
+
+  <div class="colunas" style="--n: {{ jornal.colunas|length }}">
+    {% for coluna in jornal.colunas %}
+    <div class="coluna">
+      {% for bloco in coluna %}
+        {% if bloco.titulo %}
+          <h2>{{ bloco.titulo|sentenca }}</h2>
+          {% if bloco.subtitulo %}<p class="linha-fina">{{ bloco.subtitulo|sentenca }}</p>{% endif %}
+        {% elif bloco.texto %}
+          <div class="texto">{{ bloco.texto|paragrafos }}</div>
+        {% elif bloco.imagem %}
+          {{ foto(bloco.imagem, bloco.descricao, "3x2") }}
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

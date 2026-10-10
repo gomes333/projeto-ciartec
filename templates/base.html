@@ -1,0 +1,88 @@
+{% from "macros.html" import foto, materia %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block titulo %}{{ projeto.jornal }} — {{ projeto.nome }}{% endblock %}</title>
+  <meta name="description" content="{{ projeto.descricao }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ projeto.jornal }} — {{ projeto.nome }}">
+  <meta property="og:description" content="{{ projeto.descricao }}">
+
+  {# Aplica o tema salvo antes de desenhar a página (evita o "flash" branco no modo noturno) #}
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("voz-ativa-tema");
+        if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=UnifrakturCook:wght@700&display=swap">
+  <link rel="stylesheet" href="static/estilo.css">
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <div class="pagina">
+    <div class="utilitaria">
+      <time data-hoje>{{ hoje }}</time>
+      <span class="utilitaria-edicao">{{ projeto.edicao }}</span>
+      <button type="button" class="tema" id="tema" aria-pressed="false">Modo noturno</button>
+    </div>
+
+    <header class="cabecalho">
+      <a class="nome-jornal" href="index.html">{{ projeto.jornal }}</a>
+    </header>
+  </div>
+
+  <div class="barra" id="barra">
+    <div class="pagina barra-miolo">
+      <a class="mini-nome" href="index.html" aria-hidden="true" tabindex="-1">{{ projeto.jornal }}</a>
+      <button type="button" class="menu-botao" id="menu-botao" aria-expanded="false" aria-controls="menu">
+        <span class="menu-icone" aria-hidden="true"></span>Seções
+      </button>
+      <nav class="menu" id="menu" aria-label="Seções do jornal">
+        {% for p in paginas %}
+          <a href="{{ p.arquivo }}"{% if pagina and p.arquivo == pagina.arquivo %} aria-current="page"{% endif %}>{{ p.secao }}</a>
+        {% endfor %}
+      </nav>
+    </div>
+    <div class="progresso" aria-hidden="true"><span id="progresso"></span></div>
+  </div>
+
+  <main class="pagina" id="conteudo">
+    {% block conteudo %}{% endblock %}
+
+    {% if pagina and (anterior or seguinte) %}
+    <nav class="pager" aria-label="Navegação entre páginas">
+      {% if anterior %}
+      <a class="pager-anterior" href="{{ anterior.arquivo }}" rel="prev">
+        <small>Página anterior</small>
+        <strong>{{ anterior.secao }}</strong>
+      </a>
+      {% endif %}
+      {% if seguinte %}
+      <a class="pager-proxima" href="{{ seguinte.arquivo }}" rel="next">
+        <small>Continua na página {{ indice + 2 }}</small>
+        <strong>{{ pagina.proxima or seguinte.secao }}</strong>
+      </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </main>
+
+  <footer class="pagina rodape">
+    <div class="rodape-nome">{{ projeto.jornal }}</div>
+    {% for linha in projeto.rodape %}<p>{{ linha }}</p>{% endfor %}
+  </footer>
+
+  <script src="static/jornal.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block titulo %}Página não encontrada — {{ projeto.jornal }}{% endblock %}
+{% block conteudo %}
+<div class="quiz-pagina">
+  <div class="quiz-intro">
+    <p class="chapeu">Erro 404</p>
+    <h1>Esta página não está nesta edição</h1>
+    <p class="linha-fina">O endereço pode ter mudado ou estar digitado errado. Volte à capa para continuar a leitura.</p>
+    <p><a class="botao" href="index.html">Voltar à capa</a></p>
+  </div>
+</div>
+{% endblock %}

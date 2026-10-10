@@ -1,0 +1,46 @@
+{# Peças reutilizáveis. "foto" mostra a imagem, ou um espaço reservado elegante se o arquivo não existir. #}
+
+{% macro foto(arquivo, descricao, proporcao="3x2", legenda=None, alt=True, prioridade=False) %}
+{% set real = foto_arquivo(arquivo) %}
+<figure class="quadro">
+  <div class="foto r-{{ proporcao }}{% if not real %} vazia{% endif %}">
+    {% if real %}
+      <img src="imagens/{{ real|urlencode }}" alt="{{ descricao if alt else '' }}" {% if prioridade %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+    {% else %}
+      <span>Fotografia<br><small>imagens/{{ arquivo }}</small></span>
+    {% endif %}
+  </div>
+  {% if legenda %}<figcaption>{{ legenda|limpar }}</figcaption>{% endif %}
+</figure>
+{% endmacro %}
+
+{% macro citacao(c) %}
+<blockquote class="citacao">
+  <p>“{{ c.texto|limpar }}”</p>
+  <cite>{{ c.autor }}</cite>
+</blockquote>
+{% endmacro %}
+
+{% macro materia(m) %}
+{% if m.largura == 'total' %}
+<article class="materia materia-larga">
+  <div class="materia-lateral">
+    {% if m.imagem %}{{ foto(m.imagem, m.descricao, "4x5", m.legenda) }}{% endif %}
+  </div>
+  <div class="materia-corpo">
+    <h2>{{ m.titulo|sentenca }}</h2>
+    {% if m.subtitulo %}<p class="linha-fina">{{ m.subtitulo|sentenca }}</p>{% endif %}
+    <div class="texto capitular">{{ m.texto|paragrafos }}</div>
+    {% if m.citacao %}{{ citacao(m.citacao) }}{% endif %}
+  </div>
+</article>
+{% else %}
+<article class="materia">
+  {% if m.imagem %}{{ foto(m.imagem, m.descricao, "3x2", m.legenda) }}{% endif %}
+  <h2>{{ m.titulo|sentenca }}</h2>
+  {% if m.subtitulo %}<p class="linha-fina">{{ m.subtitulo|sentenca }}</p>{% endif %}
+  <div class="texto">{{ m.texto|paragrafos }}</div>
+  {% if m.citacao %}{{ citacao(m.citacao) }}{% endif %}
+</article>
+{% endif %}
+{% endmacro %}
