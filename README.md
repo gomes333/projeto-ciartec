@@ -125,11 +125,7 @@ A configuração de cada plataforma deve apontar para o comando de build e o dir
 
 ## Créditos
 
-<<<<<<< HEAD
-Projeto desenvolvido originalmente por **Isadora Gomes - ([@gomes333](https://github.com/gomes333))** para a CIARTEC, com contribuições posteriores de **Miguel Henrique — ([@GalvaoLabs](https://github.com/GalvaoLabs))** no desenvolvimento e aprimoramento do site.
-=======
 Projeto desenvolvido originalmente por **Isadora Vicente - ([@gomes333](https://github.com/gomes333))** para a CIARTEC, com contribuições posteriores de **Miguel Henrique — ([@GalvaoLabs](https://github.com/GalvaoLabs))** no desenvolvimento e aprimoramento do site.
->>>>>>> 4f4bfc6 (Adiciona espaço para QR code acima do rodapé)
 
 A autoria das contribuições deve ser reconhecida de acordo com a participação efetiva de cada colaborador.
 
